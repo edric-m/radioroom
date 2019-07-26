@@ -8,13 +8,42 @@
             form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
             form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
             form button { width: 9%; background: rgb(130, 224, 225); border: none; padding: 10px; }
+            button { position: absolute; bottom: 50; right: 0; }
             #messages { list-style-type: none; margin: 0; padding: 0; }
             #messages li { padding: 5px 10px; }
             #messages li:nth-child(odd) { background: #eee; }
+            * { box-sizing: border-box; }
+            /* Create two equal columns that floats next to each other */
+            .column {
+                float: left;
+                width: 50%;
+                padding: 10px;
+                height: 300px; /* Should be removed. Only for demonstration */
+            }
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
         </style>
     </head>
     <body>
-        <ul id="messages"></ul>
+        <div>
+            <button type="button">Add</button>
+        </div>
+        <div class="row">
+            <div class="column" style="background-color:#aaa;">
+              <h2>List</h2>
+                <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+                <div id="player"></div>
+            </div>
+            <div class="column" style="background-color:#bbb;">
+              <h2>Chat</h2>
+                <ul id="messages"></ul>
+            </div>
+        </div>
+        
         <form action="">
             <input id="m" autocomplete="off" /><button>Send</button>
         </form>
@@ -33,6 +62,49 @@
                     $('#messages').append($('<li>').text(msg));
                 });
             }); 
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                height: '195',
+                width: '320',
+                videoId: 'M7lc1UVf-VE',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+                });
+            }
+
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                event.target.playVideo();
+            }
+
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            var done = false;
+            function onPlayerStateChange(event) {
+                var socket = io();
+                socket.emit('chat message', player.getCurrentTime());
+                if (event.data == YT.PlayerState.PLAYING && !done) {
+                //setTimeout(stopVideo, 6000);
+                
+                done = true;
+                }
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
         </script>
     </body>
 </html>
