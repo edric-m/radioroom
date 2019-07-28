@@ -8,7 +8,26 @@ body {
     font: 13px Helvetica, Arial;
 }
 
-form {
+#addForm {
+    position: fixed;
+    width: 50%;
+}
+
+#addForm input {
+    border: 0;
+    padding: 10px;
+    width: 45%;
+    margin-right: .5%;
+}
+
+#addForm button {
+    width: 9%;
+    background: rgb(130, 224, 225);
+    border: none;
+    padding: 10px;
+}
+
+#chatForm {
     background: #000;
     padding: 3px;
     position: fixed;
@@ -16,14 +35,14 @@ form {
     width: 100%;
 }
 
-form input {
+#chatForm input {
     border: 0;
     padding: 10px;
     width: 90%;
     margin-right: .5%;
 }
 
-form button {
+#chatForm button {
     width: 9%;
     background: rgb(130, 224, 225);
     border: none;
@@ -48,6 +67,13 @@ form button {
     position: absolute;
     bottom: 50;
     right: 0;
+}
+
+.btn_add {
+    width: 9%;
+    background: rgb(130, 224, 225);
+    border: none;
+    padding: 10px;
 }
 
 /* Create two equal columns that floats next to each other */

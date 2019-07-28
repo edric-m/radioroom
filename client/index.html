@@ -11,22 +11,26 @@
 </head>
 
 <body>
-    <div>
-        <button type="button">Add</button>
-    </div>
     <div class="row">
-        <div class="column" style="background-color:#aaa;">
+        <div class="column">
             <h2>List</h2>
             <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-            <div id="player"></div>
+                    <div id="player"></div>
+            <div>
+                <form id="addForm" action="">
+                    <input id="addvid">
+                    <button>Add</button>
+                    <!--<input type="button" class="btn_add" onclick="addVideo('aRfRzsEhgVQ')" value="Add">-->
+                </form>
+            </div>
         </div>
-        <div class="column" style="background-color:#bbb;">
+        <div class="column">
             <h2>Chat</h2>
             <ul id="messages"></ul>
         </div>
     </div>
 
-    <form action="">
+    <form id="chatForm" action="">
         <input id="m" autocomplete="off" /><button>Send</button>
     </form>
 

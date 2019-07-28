@@ -3,6 +3,7 @@ $(function () {
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         socket.emit('chat message', $('#m').val());
+        addVideo($('#addvid').val());
         $('#m').val('');
         return false;
     });
