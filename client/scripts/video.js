@@ -31,12 +31,7 @@ function onPlayerReady(event) {
 var done = false;
 function onPlayerStateChange(event) {
     var socket = io();
-    socket.emit('chat message', player.getCurrentTime());
-    if (event.data == YT.PlayerState.PLAYING && !done) {
-    //setTimeout(stopVideo, 6000);
-    
-    done = true;
-    }
+    socket.emit('video event', player.getCurrentTime());
 }
 function stopVideo() {
     player.stopVideo();
