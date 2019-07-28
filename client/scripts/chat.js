@@ -5,6 +5,7 @@ $(function () {
         socket.emit('chat message', $('#m').val());
         addVideo($('#addvid').val());
         $('#m').val('');
+        $('#addvid').val('');
         return false;
     });
     socket.on('chat message', function (msg) {

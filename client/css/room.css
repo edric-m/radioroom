@@ -9,8 +9,8 @@ body {
 }
 
 #addForm {
-    position: fixed;
-    width: 50%;
+    position: static;
+    width: 100%;
 }
 
 #addForm input {
