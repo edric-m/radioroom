@@ -37,15 +37,16 @@ function onPlayerReady(event) {
 var done = false;
 function onPlayerStateChange(event) {
     var socket = io();
-    socket.emit('video event', player.getCurrentTime());
+    socket.emit('video event', player.getCurrentTime(), queue[idx]);
     if (event.data == YT.PlayerState.ENDED) {
         //move to the next video index in queue[]
         idx = idx + 1;
         if (idx == queue.length) {
             idx = 0;
         }
-        socket.emit('video event', 'next ' + queue[idx]); //use console log in future
-        player.loadVideoById({ videoId: queue[idx] });
+        socket.emit('next video', 0, queue[idx]);
+        //socket.emit('video event', 'next ' + queue[idx]); //use console log in future
+        //player.loadVideoById({ videoId: queue[idx] });
     }
 }
 

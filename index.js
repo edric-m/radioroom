@@ -23,9 +23,10 @@ io.on('connection', function(socket){
         io.emit('chat message', msg);
     });
 
-    socket.on('video event', function(msg){
+    socket.on('video event', function(msg, id){
         //io.emit('chat message', msg + ' vid'); //message room about event
-        console.log('vidloc ' + msg);
+        console.log('vidloc ' + msg + ' ' + id);
+        io.emit('vidloc', msg, id);
     });
 });
 
